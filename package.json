@@ -1,0 +1,21 @@
+{
+  "name": "create-stackr",
+  "version": "0.1.0",
+  "description": "CLI tool to scaffold projects with your preferred stack — with memory",
+  "bin": {
+    "create-stackr": "./bin/index.js"
+  },
+  "type": "module",
+  "scripts": {
+    "start": "node bin/index.js"
+  },
+  "keywords": ["cli", "scaffold", "starter", "nextjs", "express", "nodejs", "boilerplate"],
+  "author": "Andrés Deandar",
+  "license": "MIT",
+  "dependencies": {
+    "@inquirer/prompts": "^5.0.0",
+    "chalk": "^5.3.0",
+    "ora": "^8.0.1",
+    "degit": "^2.8.4"
+  }
+}
