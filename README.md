@@ -5,7 +5,7 @@
 Stackr is a CLI tool that scaffolds projects the way *you* like them. It remembers your stack preferences so you can go from zero to coding in seconds.
 
 ```bash
-npx create-stackr
+npx @andres-deandar/create-mystack
 ```
 
 ---
@@ -24,7 +24,7 @@ Every developer wastes hours configuring the same stack over and over. `create-n
 ## Usage
 
 ```bash
-npx create-stackr
+npx @andres-deandar/create-mystack
 ```
 
 First run — Stackr walks you through your stack:
@@ -69,7 +69,7 @@ Second run — Stackr remembers:
 Stackr es una herramienta CLI que genera proyectos exactamente como *tú* los quieres. Recuerda tus preferencias para que puedas pasar de cero a programar en segundos.
  
 ```bash
-npx create-stackr
+npx @andres-deandar/create-mystack
 ```
  
 ---
@@ -88,7 +88,7 @@ Todo developer pierde horas configurando el mismo stack una y otra vez. `create-
 ## Uso
  
 ```bash
-npx create-stackr
+npx @andres-deandar/create-mystack
 ```
  
 Primera vez — Stackr te guía por tu stack:

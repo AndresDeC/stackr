@@ -1,17 +1,33 @@
 {
-  "name": "create-stackr",
+  "name": "@andres-deandar/create-mystack",
   "version": "0.1.0",
   "description": "CLI tool to scaffold projects with your preferred stack — with memory",
   "bin": {
-    "create-stackr": "./bin/index.js"
+    "create-mystack": "./bin/index.js"
   },
   "type": "module",
   "scripts": {
     "start": "node bin/index.js"
   },
-  "keywords": ["cli", "scaffold", "starter", "nextjs", "express", "nodejs", "boilerplate"],
+  "keywords": ["cli", "scaffold", "starter", "nextjs", "express", "nodejs", "boilerplate", "developer-tools", "create-app"],
   "author": "Andrés Deandar",
   "license": "MIT",
+  "homepage": "https://github.com/AndresDeC/stackr#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AndresDeC/stackr.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AndresDeC/stackr/issues"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "bin",
+    "src",
+    "README.md"
+  ],
   "dependencies": {
     "@inquirer/prompts": "^5.0.0",
     "chalk": "^5.3.0",
