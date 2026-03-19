@@ -1,10 +1,10 @@
 import fs from 'fs';
-import path from 'path';
 import os from 'os';
-
+import path from 'path';
+ 
 const PREFS_DIR = path.join(os.homedir(), '.stackr');
 const PREFS_FILE = path.join(PREFS_DIR, 'config.json');
-
+ 
 export function loadPreferences() {
   try {
     if (!fs.existsSync(PREFS_FILE)) return null;
@@ -14,7 +14,7 @@ export function loadPreferences() {
     return null;
   }
 }
-
+ 
 export function savePreferences(prefs) {
   try {
     if (!fs.existsSync(PREFS_DIR)) {
@@ -25,12 +25,51 @@ export function savePreferences(prefs) {
     console.error('Could not save preferences:', err.message);
   }
 }
-
+ 
+export function saveLicense(licenseKey) {
+  const prefs = loadPreferences() || {};
+  prefs.licenseKey = licenseKey;
+  savePreferences(prefs);
+}
+ 
+export function loadLicense() {
+  const prefs = loadPreferences();
+  return prefs?.licenseKey || null;
+}
+ 
+const LABELS = {
+  // Frameworks
+  nextjs: 'Next.js',
+  'express-api': 'Express API',
+  'node-cli': 'Node.js CLI',
+  fastapi: 'FastAPI',
+  flask: 'Flask',
+  django: 'Django',
+  'rust-axum': 'Rust + Axum',
+  'rust-cli': 'Rust CLI',
+  cpp: 'C++',
+  c: 'C',
+  // Databases
+  'prisma-postgres': 'Prisma + PostgreSQL',
+  'prisma-sqlite': 'Prisma + SQLite',
+  mongoose: 'Mongoose',
+  'sqlalchemy-postgres': 'SQLAlchemy + PostgreSQL',
+  'sqlalchemy-sqlite': 'SQLAlchemy + SQLite',
+  // Auth
+  authjs: 'Auth.js',
+  jwt: 'JWT',
+  // Testing
+  vitest: 'Vitest',
+  jest: 'Jest',
+};
+ 
+const label = (val) => LABELS[val] || val;
+ 
 export function formatStackSummary(prefs) {
   if (!prefs) return null;
-  const parts = [prefs.framework];
-  if (prefs.database && prefs.database !== 'none') parts.push(prefs.database);
-  if (prefs.auth && prefs.auth !== 'none') parts.push(prefs.auth);
-  if (prefs.testing && prefs.testing !== 'none') parts.push(prefs.testing);
+  const parts = [label(prefs.framework)];
+  if (prefs.database && prefs.database !== 'none') parts.push(label(prefs.database));
+  if (prefs.auth && prefs.auth !== 'none') parts.push(label(prefs.auth));
+  if (prefs.testing && prefs.testing !== 'none') parts.push(label(prefs.testing));
   return parts.join(' + ');
 }
