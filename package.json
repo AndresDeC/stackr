@@ -1,6 +1,6 @@
 {
   "name": "@andres-deandar/create-mystack",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "CLI tool to scaffold projects with your preferred stack — with memory",
   "bin": {
     "create-mystack": "./bin/index.js"
@@ -9,7 +9,17 @@
   "scripts": {
     "start": "node bin/index.js"
   },
-  "keywords": ["cli", "scaffold", "starter", "nextjs", "express", "nodejs", "boilerplate", "developer-tools", "create-app"],
+  "keywords": [
+    "cli",
+    "scaffold",
+    "starter",
+    "nextjs",
+    "express",
+    "nodejs",
+    "boilerplate",
+    "developer-tools",
+    "create-app"
+  ],
   "author": "Andrés Deandar",
   "license": "MIT",
   "homepage": "https://github.com/AndresDeC/stackr#readme",
