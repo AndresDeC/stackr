@@ -1,8 +1,8 @@
 import chalk from 'chalk';
 import ora from 'ora';
-import { loadPreferences, savePreferences, formatStackSummary } from './preferences.js';
-import { askProjectName, askStackMode, askFullStack } from './prompts.js';
 import { generateProject } from './generator.js';
+import { formatStackSummary, loadPreferences, savePreferences } from './preferences.js';
+import { askFullStack, askProjectName, askStackMode } from './prompts.js';
 
 export async function run() {
   console.log('\n' + chalk.bold.blue('◆ Stackr') + chalk.gray(' — scaffold your stack, your way\n'));
@@ -35,10 +35,14 @@ export async function run() {
 
     spinner.succeed(chalk.green(`Project created: ${projectName}/`));
 
+    const devCommand = stack.framework === 'node-cli'
+      ? 'npm start'
+      : 'npm run dev';
+
     console.log('\n' + chalk.bold('Next steps:'));
     console.log(chalk.gray(`  cd ${projectName}`));
     console.log(chalk.gray('  npm install'));
-    console.log(chalk.gray('  npm run dev'));
+    console.log(chalk.gray(`  ${devCommand}`));
     console.log('\n' + chalk.blue('Happy building 🚀') + '\n');
 
   } catch (err) {
