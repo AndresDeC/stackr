@@ -45,7 +45,7 @@ function generateNext(dir, stack) {
     deps['@prisma/client'] = '^5.0.0';
   }
   if (stack.auth === 'authjs') {
-    deps['next-auth'] = '^5.0.0';
+    deps['next-auth'] = '^4.24.0';
   }
 
   const pkg = {
