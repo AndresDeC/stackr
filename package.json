@@ -1,6 +1,6 @@
 {
   "name": "@andres-deandar/create-mystack",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "CLI tool to scaffold projects with your preferred stack — with memory",
   "bin": {
     "create-mystack": "./bin/index.js"
