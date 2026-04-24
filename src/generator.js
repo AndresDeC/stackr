@@ -12,28 +12,6 @@ export async function generateProject(projectName, stack) {
   fs.mkdirSync(targetDir, { recursive: true });
 
   switch (stack.framework) {
-<<<<<<< HEAD
-    case 'nextjs':
-      await generateNext(targetDir, stack);
-      break;
-    case 'express-api':
-      await generateExpress(targetDir, stack);
-      break;
-    case 'node-cli':
-      await generateNodeCli(targetDir, stack);
-      break;
-    default:
-      throw new Error(`Unknown framework: ${stack.framework}`);
-  }
-
-  generateGitignore(targetDir);
-  if (stack.extras?.includes('eslint')) generateEslint(targetDir);
-  if (stack.extras?.includes('docker')) generateDocker(targetDir, stack.framework);
-  if (stack.extras?.includes('github-actions')) generateGithubActions(targetDir);
-}
-
-function generateNext(dir, stack) {
-=======
     case 'nextjs':       await generateNext(targetDir, stack); break;
     case 'express-api':  await generateExpress(targetDir, stack); break;
     case 'node-cli':     await generateNodeCli(targetDir, stack); break;
@@ -55,54 +33,27 @@ function generateNext(dir, stack) {
 
 // ─── Next.js ────────────────────────────────────────────────────────────────
 async function generateNext(dir, stack) {
->>>>>>> dadcffd (Commit stackr ultimate)
   fs.mkdirSync(path.join(dir, 'src/app'), { recursive: true });
   fs.mkdirSync(path.join(dir, 'src/components'), { recursive: true });
   fs.mkdirSync(path.join(dir, 'src/lib'), { recursive: true });
 
-<<<<<<< HEAD
-  const deps = {
-=======
   const rawDeps = {
->>>>>>> dadcffd (Commit stackr ultimate)
     next: '^14.0.0',
     react: '^18.0.0',
     'react-dom': '^18.0.0',
   };
 
   if (stack.database === 'prisma-postgres' || stack.database === 'prisma-sqlite') {
-<<<<<<< HEAD
-    deps['@prisma/client'] = '^5.0.0';
-  }
-  if (stack.auth === 'authjs') {
-    deps['next-auth'] = '^4.24.0';
-  }
-=======
     rawDeps['@prisma/client'] = '^5.0.0';
   }
   if (stack.auth === 'authjs') rawDeps['next-auth'] = '^4.24.0';
 
   const deps = await resolveNpmDeps(rawDeps);
->>>>>>> dadcffd (Commit stackr ultimate)
 
   const pkg = {
     name: path.basename(dir),
     version: '0.1.0',
     private: true,
-<<<<<<< HEAD
-    scripts: {
-      dev: 'next dev',
-      build: 'next build',
-      start: 'next start',
-      lint: 'next lint',
-    },
-    dependencies: deps,
-    devDependencies: {
-      typescript: '^5.0.0',
-      '@types/node': '^20.0.0',
-      '@types/react': '^18.0.0',
-    },
-=======
     scripts: { dev: 'next dev', build: 'next build', start: 'next start', lint: 'next lint' },
     dependencies: deps,
     devDependencies: await resolveNpmDeps({
@@ -110,19 +61,11 @@ async function generateNext(dir, stack) {
       '@types/node': '^20.0.0',
       '@types/react': '^18.0.0',
     }),
->>>>>>> dadcffd (Commit stackr ultimate)
   };
 
   fs.writeFileSync(path.join(dir, 'package.json'), JSON.stringify(pkg, null, 2));
   fs.writeFileSync(path.join(dir, 'src/app/page.tsx'), `export default function Home() {\n  return <main><h1>Welcome to your Stackr project</h1></main>;\n}\n`);
   fs.writeFileSync(path.join(dir, 'src/app/layout.tsx'), `export default function RootLayout({ children }: { children: React.ReactNode }) {\n  return <html lang="en"><body>{children}</body></html>;\n}\n`);
-<<<<<<< HEAD
-  fs.writeFileSync(path.join(dir, '.env.example'), `# App\nNEXT_PUBLIC_APP_URL=http://localhost:3000\n\n${stack.database !== 'none' ? '# Database\nDATABASE_URL="postgresql://user:password@localhost:5432/mydb"\n\n' : ''}${stack.auth !== 'none' ? '# Auth\nAUTH_SECRET=your-secret-here\n' : ''}`);
-  fs.writeFileSync(path.join(dir, 'README.md'), generateReadme(path.basename(dir), stack));
-}
-
-function generateExpress(dir, stack) {
-=======
   fs.writeFileSync(path.join(dir, 'next.config.js'), `/** @type {import('next').NextConfig} */\nconst nextConfig = {};\nexport default nextConfig;\n`);
   fs.writeFileSync(path.join(dir, 'tsconfig.json'), JSON.stringify({ compilerOptions: { target: 'ES2017', lib: ['dom', 'dom.iterable', 'esnext'], allowJs: true, skipLibCheck: true, strict: true, noEmit: true, esModuleInterop: true, module: 'esnext', moduleResolution: 'bundler', resolveJsonModule: true, isolatedModules: true, jsx: 'preserve', incremental: true, plugins: [{ name: 'next' }], paths: { '@/*': ['./src/*'] } }, include: ['next-env.d.ts', '**/*.ts', '**/*.tsx', '.next/types/**/*.ts'], exclude: ['node_modules'] }, null, 2));
   fs.writeFileSync(path.join(dir, '.env.example'), `# App\nNEXT_PUBLIC_APP_URL=http://localhost:3000\n${stack.database !== 'none' ? '\n# Database\nDATABASE_URL="postgresql://user:password@localhost:5432/mydb"\n' : ''}${stack.auth !== 'none' ? '\n# Auth\nAUTH_SECRET=your-secret-here\n' : ''}`);
@@ -292,28 +235,15 @@ async function generateAstro(dir, stack) {
 
 // ─── Express ─────────────────────────────────────────────────────────────────
 async function generateExpress(dir, stack) {
->>>>>>> dadcffd (Commit stackr ultimate)
   fs.mkdirSync(path.join(dir, 'src/routes'), { recursive: true });
   fs.mkdirSync(path.join(dir, 'src/middleware'), { recursive: true });
   fs.mkdirSync(path.join(dir, 'src/controllers'), { recursive: true });
 
-<<<<<<< HEAD
-  const deps = {
-    express: '^4.18.0',
-    dotenv: '^16.0.0',
-    cors: '^2.8.5',
-    helmet: '^7.0.0',
-  };
-
-  if (stack.auth === 'jwt') deps['jsonwebtoken'] = '^9.0.0';
-  if (stack.database === 'mongoose') deps['mongoose'] = '^8.0.0';
-=======
   const rawDeps = { express: '^4.18.0', dotenv: '^16.0.0', cors: '^2.8.5', helmet: '^7.0.0' };
   if (stack.auth === 'jwt') rawDeps['jsonwebtoken'] = '^9.0.0';
   if (stack.database === 'mongoose') rawDeps['mongoose'] = '^8.0.0';
 
   const deps = await resolveNpmDeps(rawDeps);
->>>>>>> dadcffd (Commit stackr ultimate)
 
   const pkg = {
     name: path.basename(dir),
@@ -329,12 +259,6 @@ async function generateExpress(dir, stack) {
   fs.writeFileSync(path.join(dir, 'README.md'), generateReadme(path.basename(dir), stack));
 }
 
-<<<<<<< HEAD
-function generateNodeCli(dir, stack) {
-  fs.mkdirSync(path.join(dir, 'bin'), { recursive: true });
-  fs.mkdirSync(path.join(dir, 'src'), { recursive: true });
-
-=======
 // ─── Node CLI ────────────────────────────────────────────────────────────────
 async function generateNodeCli(dir, stack) {
   fs.mkdirSync(path.join(dir, 'bin'), { recursive: true });
@@ -342,18 +266,13 @@ async function generateNodeCli(dir, stack) {
 
   const deps = await resolveNpmDeps({ chalk: '^5.3.0', '@inquirer/prompts': '^5.0.0' });
 
->>>>>>> dadcffd (Commit stackr ultimate)
   const pkg = {
     name: path.basename(dir),
     version: '0.1.0',
     type: 'module',
     bin: { [path.basename(dir)]: './bin/index.js' },
     scripts: { start: 'node bin/index.js' },
-<<<<<<< HEAD
-    dependencies: { chalk: '^5.3.0', '@inquirer/prompts': '^5.0.0' },
-=======
     dependencies: deps,
->>>>>>> dadcffd (Commit stackr ultimate)
   };
 
   fs.writeFileSync(path.join(dir, 'package.json'), JSON.stringify(pkg, null, 2));
@@ -362,15 +281,10 @@ async function generateNodeCli(dir, stack) {
   fs.writeFileSync(path.join(dir, 'README.md'), generateReadme(path.basename(dir), stack));
 }
 
-<<<<<<< HEAD
-function generateGitignore(dir) {
-  fs.writeFileSync(path.join(dir, '.gitignore'), `node_modules\n.env\n.env.local\n.next\ndist\n*.log\n`);
-=======
 // ─── Shared generators ───────────────────────────────────────────────────────
 function generateGitignore(dir, framework) {
   const extras = framework === 'nextjs' ? '\n.next\nout\n' : framework === 'astro' ? '\ndist\n.astro\n' : '\ndist\n';
   fs.writeFileSync(path.join(dir, '.gitignore'), `node_modules\n.env\n.env.local${extras}*.log\n`);
->>>>>>> dadcffd (Commit stackr ultimate)
 }
 
 function generateEslint(dir) {
@@ -379,25 +293,12 @@ function generateEslint(dir) {
 }
 
 function generateDocker(dir, framework) {
-<<<<<<< HEAD
-  const port = framework === 'nextjs' ? 3000 : 3000;
-  fs.writeFileSync(path.join(dir, 'Dockerfile'), `FROM node:20-alpine\nWORKDIR /app\nCOPY package*.json ./\nRUN npm install\nCOPY . .\nEXPOSE ${port}\nCMD ["npm", "start"]\n`);
-  fs.writeFileSync(path.join(dir, '.dockerignore'), `node_modules\n.env\n.next\n`);
-=======
   fs.writeFileSync(path.join(dir, 'Dockerfile'), `FROM node:20-alpine\nWORKDIR /app\nCOPY package*.json ./\nRUN npm install\nCOPY . .\nEXPOSE 3000\nCMD ["npm", "start"]\n`);
   fs.writeFileSync(path.join(dir, '.dockerignore'), `node_modules\n.env\n.next\ndist\n`);
->>>>>>> dadcffd (Commit stackr ultimate)
 }
 
 function generateGithubActions(dir) {
   fs.mkdirSync(path.join(dir, '.github/workflows'), { recursive: true });
-<<<<<<< HEAD
-  fs.writeFileSync(path.join(dir, '.github/workflows/ci.yml'), `name: CI\non: [push, pull_request]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: 20\n      - run: npm install\n      - run: npm run lint\n`);
-}
-
-function generateReadme(name, stack) {
-  return `# ${name}\n\nScaffolded with [Stackr](https://github.com/yourusername/stackr)\n\n## Stack\n- **Framework:** ${stack.framework}\n- **Database:** ${stack.database || 'none'}\n- **Auth:** ${stack.auth || 'none'}\n- **Testing:** ${stack.testing || 'none'}\n\n## Getting started\n\n\`\`\`bash\nnpm install\nnpm run dev\n\`\`\`\n\n## Environment variables\n\nCopy \`.env.example\` to \`.env\` and fill in your values.\n`;
-=======
   fs.writeFileSync(path.join(dir, '.github/workflows/ci.yml'), `name: CI\non: [push, pull_request]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: 20\n      - run: npm install\n      - run: npm run build\n`);
 }
 
@@ -417,5 +318,4 @@ function generateReadme(name, stack) {
   const label = (v) => LABELS[v] || v;
   const devCmd = ['node-cli'].includes(stack.framework) ? 'npm start' : 'npm run dev';
   return `# ${name}\n\nScaffolded with [Stackr](https://github.com/AndresDeC/stackr)\n\n## Stack\n- **Framework:** ${label(stack.framework)}\n- **Database:** ${label(stack.database) || 'none'}\n- **Auth:** ${label(stack.auth) || 'none'}\n- **Testing:** ${label(stack.testing) || 'none'}\n\n## Getting started\n\n\`\`\`bash\nnpm install\n${devCmd}\n\`\`\`\n\n## Environment variables\n\nCopy \`.env.example\` to \`.env\` and fill in your values.\n`;
->>>>>>> dadcffd (Commit stackr ultimate)
 }
