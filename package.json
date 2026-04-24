@@ -1,14 +1,23 @@
 {
+<<<<<<< HEAD
   "name": "@andres-deandar/create-mystack",
   "version": "0.1.4",
   "description": "CLI tool to scaffold projects with your preferred stack — with memory",
   "bin": {
     "create-mystack": "./bin/index.js"
+=======
+  "name": "create-stackr",
+  "version": "1.0.0",
+  "description": "CLI tool to scaffold projects with your preferred stack — with memory",
+  "bin": {
+    "create-stackr": "./bin/index.js"
+>>>>>>> dadcffd (Commit stackr ultimate)
   },
   "type": "module",
   "scripts": {
     "start": "node bin/index.js"
   },
+<<<<<<< HEAD
   "keywords": [
     "cli",
     "scaffold",
@@ -20,6 +29,9 @@
     "developer-tools",
     "create-app"
   ],
+=======
+  "keywords": ["cli", "scaffold", "starter", "nextjs", "express", "nodejs", "boilerplate", "developer-tools", "create-app"],
+>>>>>>> dadcffd (Commit stackr ultimate)
   "author": "Andrés Deandar",
   "license": "MIT",
   "homepage": "https://github.com/AndresDeC/stackr#readme",

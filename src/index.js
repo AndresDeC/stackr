@@ -1,48 +1,51 @@
 import chalk from 'chalk';
 import ora from 'ora';
 import { generateProject } from './generator.js';
-import { formatStackSummary, loadPreferences, savePreferences } from './preferences.js';
-import { askFullStack, askProjectName, askStackMode } from './prompts.js';
+import { loadProfiles, saveProfile } from './preferences.js';
+import { askFullStack, askProfileName, askProfileSelection, askProjectName } from './prompts.js';
 
 export async function run() {
-  console.log('\n' + chalk.bold.blue('◆ Stackr') + chalk.gray(' — scaffold your stack, your way\n'));
+  console.log('\n' + chalk.bold.blue('◆ Stackr Ultimate') + chalk.gray(' — scaffold your stack, your way (Open Source)\n'));
 
   try {
     const projectName = await askProjectName();
-    const saved = loadPreferences();
+    const profiles = loadProfiles();
+    const hasProfiles = Object.keys(profiles).length > 0;
+    
     let stack;
 
-    if (saved) {
-      const summary = formatStackSummary(saved);
-      const mode = await askStackMode(summary);
-
-      if (mode === 'same') {
-        stack = saved;
-      } else {
+    if (hasProfiles) {
+      const choice = await askProfileSelection(profiles);
+      
+      if (choice === 'new') {
         stack = await askFullStack();
-        savePreferences(stack);
+        const profileName = await askProfileName();
+        saveProfile(profileName, stack);
+        console.log(chalk.green(`\n✓ Profile "${profileName}" saved for future use.`));
+      } else {
+        stack = choice; // Usa el perfil seleccionado
       }
     } else {
-      console.log(chalk.gray("First time? Let's set up your stack.\n"));
+      console.log(chalk.gray("First time? Let's set up your first stack profile.\n"));
       stack = await askFullStack();
-      savePreferences(stack);
+      const profileName = await askProfileName();
+      saveProfile(profileName, stack);
+      console.log(chalk.green(`\n✓ Profile "${profileName}" saved for future use.`));
     }
 
     console.log('');
-    const spinner = ora(`Creating ${chalk.bold(projectName)}...`).start();
+    const spinner = ora(
+      `Creating ${chalk.bold(projectName)}` + chalk.cyan(' (Optimizing with latest versions...)') + `...`
+    ).start();
 
     await generateProject(projectName, stack);
 
     spinner.succeed(chalk.green(`Project created: ${projectName}/`));
 
-    const devCommand = stack.framework === 'node-cli'
-      ? 'npm start'
-      : 'npm run dev';
-
     console.log('\n' + chalk.bold('Next steps:'));
     console.log(chalk.gray(`  cd ${projectName}`));
     console.log(chalk.gray('  npm install'));
-    console.log(chalk.gray(`  ${devCommand}`));
+    console.log(chalk.gray('  npm run dev'));
     console.log('\n' + chalk.blue('Happy building 🚀') + '\n');
 
   } catch (err) {

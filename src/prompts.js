@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 import { input, select, checkbox } from '@inquirer/prompts';
+=======
+import { checkbox, input, select } from '@inquirer/prompts';
+import { formatStackSummary } from './preferences.js';
+>>>>>>> dadcffd (Commit stackr ultimate)
 
 export async function askProjectName() {
   return input({
@@ -8,6 +13,7 @@ export async function askProjectName() {
   });
 }
 
+<<<<<<< HEAD
 export async function askStackMode(summary) {
   return select({
     message: 'Stack setup:',
@@ -21,6 +27,29 @@ export async function askStackMode(summary) {
         value: 'different',
       },
     ],
+=======
+// NUEVO: Menú interactivo con todos los perfiles guardados
+export async function askProfileSelection(profiles) {
+  const choices = Object.keys(profiles).map((name) => ({
+    name: `${name}  (${formatStackSummary(profiles[name])})`,
+    value: profiles[name],
+  }));
+  
+  choices.push({ name: '✨ Create new custom stack', value: 'new' });
+
+  return select({
+    message: 'Select a stack profile:',
+    choices,
+  });
+}
+
+// NUEVO: Preguntar el nombre para guardar el stack
+export async function askProfileName() {
+  return input({
+    message: 'Save this stack as (e.g., "App 1", "Fast API"):',
+    default: 'My Stack',
+    validate: (v) => v.trim().length > 0 || 'Name cannot be empty',
+>>>>>>> dadcffd (Commit stackr ultimate)
   });
 }
 
@@ -29,11 +58,36 @@ export async function askFullStack() {
     message: 'Framework:',
     choices: [
       { name: 'Next.js', value: 'nextjs' },
+<<<<<<< HEAD
       { name: 'Express API', value: 'express-api' },
+=======
+      { name: 'Vite + React', value: 'vite-react' },
+      { name: 'Vite + Vue', value: 'vite-vue' },
+      { name: 'Astro', value: 'astro' },
+      { name: 'SvelteKit', value: 'sveltekit' },
+      { name: 'Express API', value: 'express-api' },
+      { name: 'Fastify API', value: 'fastify' },
+      { name: 'Hono API', value: 'hono' },
+>>>>>>> dadcffd (Commit stackr ultimate)
       { name: 'Node.js CLI tool', value: 'node-cli' },
     ],
   });
 
+<<<<<<< HEAD
+=======
+  if (['vite-react', 'vite-vue', 'sveltekit', 'astro', 'node-cli', 'hono'].includes(framework)) {
+    const extras = await checkbox({
+      message: 'Extras: (space to select)',
+      choices: [
+        { name: 'ESLint + Prettier', value: 'eslint' },
+        { name: 'Docker', value: 'docker' },
+        { name: 'GitHub Actions CI', value: 'github-actions' },
+      ],
+    });
+    return { framework, database: 'none', auth: 'none', testing: 'none', extras };
+  }
+
+>>>>>>> dadcffd (Commit stackr ultimate)
   const database = await select({
     message: 'Database:',
     choices: [
@@ -73,4 +127,8 @@ export async function askFullStack() {
   });
 
   return { framework, database, auth, testing, extras };
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> dadcffd (Commit stackr ultimate)

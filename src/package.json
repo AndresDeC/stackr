@@ -1,0 +1,37 @@
+{
+  "name": "create-stackr-ultimate",
+  "version": "1.0.0",
+  "description": "The ultimate multi-language stack generator — Open Source",
+  "bin": {
+    "create-stackr-ultimate": "./bin/index.js"
+  },
+  "type": "module",
+  "scripts": {
+    "start": "node bin/index.js"
+  },
+  "keywords": ["cli", "scaffold", "starter", "nextjs", "express", "nodejs", "boilerplate", "developer-tools", "create-app", "open-source"],
+  "author": "Andrés Deandar",
+  "license": "MIT",
+  "homepage": "https://github.com/AndresDeC/stackr-ultimate#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AndresDeC/stackr-ultimate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AndresDeC/stackr-ultimate/issues"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "bin",
+    "src",
+    "README.md"
+  ],
+  "dependencies": {
+    "@inquirer/prompts": "^5.0.0",
+    "chalk": "^5.3.0",
+    "ora": "^8.0.1",
+    "degit": "^2.8.4"
+  }
+}
