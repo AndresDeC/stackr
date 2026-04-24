@@ -1,5 +1,5 @@
 {
-  "name": "@andres-deandar/stacker-ultimate",
+  "name": "stacker-ultimate",
   "version": "2.0.0",
   "description": "CLI tool to scaffold projects with your preferred stack — with memory",
   "main": "./src/index.js",
