@@ -4,8 +4,9 @@
 
 Stackr is a CLI tool that scaffolds projects the way *you* like them. It remembers your stack preferences so you can go from zero to coding in seconds.
 
+# Install
 ```bash
-npx @andres-deandar/create-mystack
+npm install stacker-ultimate
 ```
 
 ---
@@ -21,10 +22,10 @@ Every developer wastes hours configuring the same stack over and over. `create-n
 - **Multi-framework** — Next.js, Express API, Node.js CLI tools
 - **Extras** — ESLint + Prettier, Docker, GitHub Actions, Husky
 
-## Usage
+## One use
 
 ```bash
-npx @andres-deandar/create-mystack
+npx stacker-ultimate
 ```
 
 First run — Stackr walks you through your stack:
@@ -68,8 +69,9 @@ Second run — Stackr remembers:
  
 Stackr es una herramienta CLI que genera proyectos exactamente como *tú* los quieres. Recuerda tus preferencias para que puedas pasar de cero a programar en segundos.
  
+# Descarga
 ```bash
-npx @andres-deandar/create-mystack
+npm install stacker-ultimate
 ```
  
 ---
@@ -85,10 +87,10 @@ Todo developer pierde horas configurando el mismo stack una y otra vez. `create-
 - **Multi-framework** — Next.js, Express API, herramientas CLI de Node.js
 - **Extras** — ESLint + Prettier, Docker, GitHub Actions, Husky
  
-## Uso
+## Uso unico
  
 ```bash
-npx @andres-deandar/create-mystack
+npx stacker-ultimate
 ```
  
 Primera vez — Stackr te guía por tu stack:
