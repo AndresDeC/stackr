@@ -1,9 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-<<<<<<< HEAD
-=======
 import { resolveNpmDeps } from './versioning.js';
->>>>>>> dadcffd (Commit stackr ultimate)
 
 export async function generateProject(projectName, stack) {
   const targetDir = path.join(process.cwd(), projectName);
