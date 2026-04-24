@@ -6,7 +6,7 @@ Stackr is a CLI tool that scaffolds projects the way *you* like them. It remembe
 
 # Install
 ```bash
-npm install stacker-ultimate
+npm install stackr-ultimate
 ```
 
 ---
@@ -25,7 +25,7 @@ Every developer wastes hours configuring the same stack over and over. `create-n
 ## One use
 
 ```bash
-npx stacker-ultimate
+npx stackr-ultimate
 ```
 
 First run — Stackr walks you through your stack:
@@ -71,7 +71,7 @@ Stackr es una herramienta CLI que genera proyectos exactamente como *tú* los qu
  
 # Descarga
 ```bash
-npm install stacker-ultimate
+npm install stackr-ultimate
 ```
  
 ---
@@ -90,7 +90,7 @@ Todo developer pierde horas configurando el mismo stack una y otra vez. `create-
 ## Uso unico
  
 ```bash
-npx stacker-ultimate
+npx stackr-ultimate
 ```
  
 Primera vez — Stackr te guía por tu stack:
