@@ -4,7 +4,7 @@
   "description": "CLI tool to scaffold projects with your preferred stack — with memory",
   "main": "./src/index.js",
   "bin": {
-    "stacker-ultimate": "./bin/index.js"
+    "stacker": "./bin/index.js"
   },
   "type": "module",
   "scripts": {

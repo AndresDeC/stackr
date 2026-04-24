@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "Scaffold any stack with named profiles and version control — built with AI, open source forever",
   "bin": {
-    "stackr-ultimate": "./bin/index.js"
+    "stackr": "./bin/index.js"
   },
   "type": "module",
   "scripts": {
