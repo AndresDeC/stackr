@@ -1,6 +1,6 @@
 {
   "name": "@andres-deandar/stacker-ultimate",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "CLI tool to scaffold projects with your preferred stack — with memory",
   "main": "./src/index.js",
   "bin": {
