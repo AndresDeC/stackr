@@ -1,6 +1,6 @@
 import fs from 'fs';
-import os from 'os';
 import path from 'path';
+import os from 'os';
 
 const PREFS_DIR = path.join(os.homedir(), '.stackr');
 const PROFILES_FILE = path.join(PREFS_DIR, 'profiles.json');
@@ -23,7 +23,6 @@ export function saveProfile(name, stack) {
     if (!fs.existsSync(PREFS_DIR)) {
       fs.mkdirSync(PREFS_DIR, { recursive: true });
     }
-
     const data = fs.existsSync(PROFILES_FILE)
       ? JSON.parse(fs.readFileSync(PROFILES_FILE, 'utf-8'))
       : { profiles: {} };
